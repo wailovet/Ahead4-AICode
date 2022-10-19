@@ -1,0 +1,21 @@
+{
+  "name": "Ahead4-AICode",
+  "displayName": "Ahead4-AICode",
+  "publisher": "wailovet",
+  "description": "AI代码补全",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.72.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": []
+  },
+  "enableApiProposed": true
+}
