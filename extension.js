@@ -1,8 +1,8 @@
 const vscode = require('vscode');
 const axios = require("axios")
 
-// var url = "http://119.28.6.41:8182/AI-completion"
-var url = "http://127.0.0.1:46188/AI-completion"
+var url = "http://119.28.6.41:8182/AI-completion"
+// var url = "http://127.0.0.1:46188/AI-completion"
 
 
 exports.activate = function () {
@@ -27,7 +27,7 @@ exports.activate = function () {
 				console.log("忽略取消")
 				return
 			}
-			
+
 			if (Locker) {
 				return
 			}
