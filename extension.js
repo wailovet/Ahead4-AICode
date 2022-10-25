@@ -15,10 +15,7 @@ exports.activate = function () {
 
 	vscode.languages.registerInlineCompletionItemProvider({ pattern: '**' }, {
 		provideInlineCompletionItems: async (document, position, context, token) => {
-			if (Locker) {
-				return
-			}
-			Locker = true
+		
 			let cid = String(Math.random())
 			id = cid
 			await new Promise(resolve => setTimeout(resolve, 2000));
@@ -26,8 +23,19 @@ exports.activate = function () {
 				console.log("防抖动")
 				return
 			}
+			if (token.isCancellationRequested){
+				console.log("忽略取消")
+				return
+			}
+			
+			if (Locker) {
+				return
+			}
+			Locker = true
 			StatusBar.text = "AHead4:忙碌"
 			console.log("无抖动") 
+			console.log('provideInlineCompletionItems token:', token) 
+			console.log('provideInlineCompletionItems context:', context) 
 			console.log('provideInlineCompletionItems offsetAt:', document.offsetAt(position)) 
 			const fileName = document.fileName;
 			const src = document.getText();
