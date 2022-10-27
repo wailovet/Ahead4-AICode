@@ -15,7 +15,25 @@
   ],
   "main": "./extension.js",
   "contributes": {
-    "commands": []
+    "commands": [],
+    "configuration": {
+      "title": "AHead4 AI completion",
+      "properties": {
+        "AHead4.url":{
+          "type": "string",
+          "default": "",
+          "description": "APIs available for customization"
+        },
+        "AHead4.token":{
+          "type": "string",
+          "default": "",
+          "description": "Enter the token obtained on the website"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
   },
   "enableApiProposed": true
 }
