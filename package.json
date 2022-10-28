@@ -28,6 +28,16 @@
           "type": "string",
           "default": "",
           "description": "Enter the token obtained on the website"
+        },
+        "AHead4.check_type":{
+          "type": "integer",
+          "default": "1",
+          "description": ""
+        },
+        "AHead4.max_generation":{
+          "type": "integer",
+          "default": "0",
+          "description": ""
         }
       }
     }

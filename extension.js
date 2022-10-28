@@ -5,13 +5,15 @@ const axios = require("axios")
 
 exports.activate = function () {
 	var url = vscode.workspace.getConfiguration().get('AHead4.url')
-	var token = vscode.workspace.getConfiguration().get('AHead4.token') 
+	var token = vscode.workspace.getConfiguration().get('AHead4.token')
+	var max_generation = vscode.workspace.getConfiguration().get('AHead4.max_generation')
+	var check_type = vscode.workspace.getConfiguration().get('AHead4.check_type')
 	if (!url || url == "") {
 		url = "http://119.28.6.41:8182/AI-completion"
 		if (!token || token == "") {
 			token = "de676ffb5670fbac425e748d7603c472"
 		}
-	}  
+	}
 
 
 	var StatusBar
@@ -35,16 +37,16 @@ exports.activate = function () {
 					console.log("忽略取消")
 					return
 				}
-	
+
 				if (Locker) {
 					return
 				}
 				Locker = true
 				StatusBar.text = "AHead4:busy"
-	
+
 				const fileName = document.fileName;
 				const src = document.getText();
-	
+
 				var item = await axios({
 					url: url,
 					method: 'post',
@@ -54,6 +56,8 @@ exports.activate = function () {
 						filename: fileName,
 						language: document.languageId,
 						offset: String(document.offsetAt(position)),
+						max: String(max_generation),
+						check_type: String(check_type),
 					},
 					header: {
 						'Content-Type': 'application/json'
@@ -69,15 +73,15 @@ exports.activate = function () {
 					console.log(error);
 					return undefined;
 				})
-	
+
 				StatusBar.text = "AHead4:idle"
 				Locker = false
 				var output = item
-				if (!output || output == "") { 
+				if (!output || output == "") {
 					return []
 				}
-	
-	
+
+
 				return [
 					new vscode.InlineCompletionItem(output, new vscode.Range(position, position.translate(0, output.length)),),
 				];
