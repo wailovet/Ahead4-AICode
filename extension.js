@@ -4,8 +4,8 @@ const axios = require("axios")
 
 
 exports.activate = function () {
-	var url = vscode.workspace.getConfiguration('AHead4.url').get()
-	var token = vscode.workspace.getConfiguration('AHead4.token').get() 
+	var url = vscode.workspace.getConfiguration().get('AHead4.url')
+	var token = vscode.workspace.getConfiguration().get('AHead4.token') 
 	if (!url || url == "") {
 		url = "http://119.28.6.41:8182/AI-completion"
 		if (!token || token == "") {
@@ -52,7 +52,7 @@ exports.activate = function () {
 						src: src,
 						token: token,
 						filename: fileName,
-						language_id: document.languageId,
+						language: document.languageId,
 						offset: String(document.offsetAt(position)),
 					},
 					header: {
